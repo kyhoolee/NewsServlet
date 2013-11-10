@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from CategoryRetrieverService WSDL service -->
+
+  <service name="CategoryRetriever" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://retriever.base.minzbox.com"/>
+      <parameter name="wsdlServiceElement" value="CategoryRetrieverService"/>
+      <parameter name="schemaQualified" value="http://retriever.base.minzbox.com"/>
+      <parameter name="wsdlServicePort" value="CategoryRetriever"/>
+      <parameter name="className" value="com.minzbox.base.retriever.CategoryRetriever"/>
+      <parameter name="wsdlPortType" value="CategoryRetriever"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://retriever.base.minzbox.com" xmlns:retNS="http://retriever.base.minzbox.com" xmlns:rtns="http://retriever.base.minzbox.com" xmlns:tns="http://retriever.base.minzbox.com" name="getAllCategorty" qname="operNS:getAllCategorty" returnQName="retNS:getAllCategortyReturn" returnType="rtns:ArrayOf_xsd_anyType" returnItemQName="tns:item" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://retriever.base.minzbox.com" xmlns:retNS="http://retriever.base.minzbox.com" xmlns:rtns="http://retriever.base.minzbox.com" xmlns:tns="http://retriever.base.minzbox.com" name="getCategoryByID" qname="operNS:getCategoryByID" returnQName="retNS:getCategoryByIDReturn" returnType="rtns:ArrayOf_xsd_anyType" returnItemQName="tns:item" soapAction="">
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" xmlns:pns="http://retriever.base.minzbox.com" qname="pns:ID" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://retriever.base.minzbox.com" xmlns:retNS="http://retriever.base.minzbox.com" xmlns:rtns="http://retriever.base.minzbox.com" xmlns:tns="http://retriever.base.minzbox.com" name="getCategoryByName" qname="operNS:getCategoryByName" returnQName="retNS:getCategoryByNameReturn" returnType="rtns:ArrayOf_xsd_anyType" returnItemQName="tns:item" soapAction="">
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" xmlns:pns="http://retriever.base.minzbox.com" qname="pns:Name" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://retriever.base.minzbox.com" xmlns:retNS="http://retriever.base.minzbox.com" xmlns:rtns="http://retriever.base.minzbox.com" xmlns:tns="http://retriever.base.minzbox.com" name="getCategoryByApproximateName" qname="operNS:getCategoryByApproximateName" returnQName="retNS:getCategoryByApproximateNameReturn" returnType="rtns:ArrayOf_xsd_anyType" returnItemQName="tns:item" soapAction="">
+        <parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" xmlns:pns="http://retriever.base.minzbox.com" qname="pns:Name" type="tns:string"/>
+      </operation>
+      <parameter name="allowedMethods" value="getCategoryByName getCategoryByApproximateName getAllCategorty getCategoryByID"/>
+
+      <typeMapping xmlns:ns="http://retriever.base.minzbox.com" qname="ns:&gt;getCategoryByName" type="java:com.minzbox.base.retriever.GetCategoryByName" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://retriever.base.minzbox.com" qname="ns:&gt;getAllCategortyResponse" type="java:com.minzbox.base.retriever.GetAllCategortyResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://retriever.base.minzbox.com" qname="ns:&gt;getCategoryByNameResponse" type="java:com.minzbox.base.retriever.GetCategoryByNameResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://retriever.base.minzbox.com" qname="ns:&gt;getCategoryByIDResponse" type="java:com.minzbox.base.retriever.GetCategoryByIDResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://retriever.base.minzbox.com" qname="ns:&gt;getCategoryByApproximateNameResponse" type="java:com.minzbox.base.retriever.GetCategoryByApproximateNameResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://retriever.base.minzbox.com" qname="ns:&gt;getCategoryByID" type="java:com.minzbox.base.retriever.GetCategoryByID" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <arrayMapping xmlns:ns="http://retriever.base.minzbox.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_anyType" type="java:java.lang.Object[]" innerType="cmp-ns:anyType" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://retriever.base.minzbox.com" qname="ns:&gt;getCategoryByApproximateName" type="java:com.minzbox.base.retriever.GetCategoryByApproximateName" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://retriever.base.minzbox.com" qname="ns:&gt;getAllCategorty" type="java:com.minzbox.base.retriever.GetAllCategorty" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>
