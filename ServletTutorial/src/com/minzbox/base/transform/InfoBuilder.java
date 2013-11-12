@@ -22,7 +22,7 @@ public class InfoBuilder {
 	
 	public InfoBuilder(){
 		try {
-			Class.forName("import net.arnx.jsonic.JSON;");
+			Class.forName("net.arnx.jsonic.JSON;");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
