@@ -19,6 +19,15 @@ import com.minzbox.base.entities.Information;
 import com.minzbox.base.retriever.InfoRetriever;
 
 public class InfoBuilder {
+	
+	public InfoBuilder(){
+		try {
+			Class.forName("import net.arnx.jsonic.JSON;");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public void encodeJSON() throws IOException {
 		JSONObject obj = new JSONObject();
