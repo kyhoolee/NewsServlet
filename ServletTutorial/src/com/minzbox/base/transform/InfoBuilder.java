@@ -119,9 +119,8 @@ public class InfoBuilder {
 			List<Information> infoList = new InfoRetriever()
 					.getInformationByPubDate(startDate, endDate);
 
-			String data = infoList.get(0).getRawContent();
 
-			String result = this.transformHTML(data);
+			String result = this.getJSONInfoList(infoList);
 
 			System.out.println(result);
 
@@ -132,7 +131,6 @@ public class InfoBuilder {
 	}
 	
 	public List<Information> transformInfoList(List<Information> infoList){
-		List<Information> infoResult = new ArrayList<Information>();
 		
 		for(int i = 0 ; i < infoList.size() ; i++){
 			Information info = infoList.get(i);
@@ -140,11 +138,12 @@ public class InfoBuilder {
 			infoList.set(i, info);
 		}
 		
-		return infoResult;
+		return infoList;
 	}
 	
 	public String getJSONInfoList(List<Information> infoList){
-		return JSON.encode(this.transformInfoList(infoList));
+		String result =  JSON.encode(this.transformInfoList(infoList));
+		return result;
 	}
 	
 	private Information transformInfo(Information info){
