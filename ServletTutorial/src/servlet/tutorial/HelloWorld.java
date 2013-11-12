@@ -33,6 +33,10 @@ public class HelloWorld extends HttpServlet {
 		String startDate = req.getParameter("startDate");
 		String endDate = req.getParameter("endDate");
 		
+		if(startDate == null || endDate == null){
+			out.print("[]");
+		}
+		
 		InfoRetriever infoRetriever = new InfoRetriever();
 		List<Information> infoList;
 		
