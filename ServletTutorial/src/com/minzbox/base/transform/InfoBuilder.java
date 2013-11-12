@@ -21,12 +21,7 @@ import com.minzbox.base.retriever.InfoRetriever;
 public class InfoBuilder {
 	
 	public InfoBuilder(){
-		try {
-			Class.forName("net.arnx.jsonic.JSON;");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 	}
 
 	public void encodeJSON() throws IOException {
