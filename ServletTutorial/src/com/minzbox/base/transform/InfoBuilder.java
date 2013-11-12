@@ -47,8 +47,15 @@ public class InfoBuilder {
 		System.out.println(aText);
 	}
 
-	public String transformHTML(String htmlContent) {
+	public String transformList(List<String> htmlData){
 		String result = "";
+		
+		
+		
+		return result;
+	}
+	
+	public List<Paragraph> transformObject(String htmlContent){
 		Document doc = Jsoup.parse(htmlContent);
 
 		Elements paras = doc.select("p"); // a with href
@@ -78,14 +85,22 @@ public class InfoBuilder {
 				imageList.add(img);
 			}
 
-			System.out.println("----------------------");
-			System.out.println(para.toString());
-			System.out.println("++++++++++++++++++++++");
+//			System.out.println("----------------------");
+//			System.out.println(para.toString());
+//			System.out.println("++++++++++++++++++++++");
 			
 			paraObject.setImages(imageList);
 			
 			paraResults.add(paraObject);
 		}
+
+		return paraResults;
+	}
+	
+	public String transformHTML(String htmlContent) {
+		String result = "";
+		
+		List<Paragraph> paraResults = this.transformObject(htmlContent);
 
 		result = JSON.encode(paraResults);
 		System.out.println(result);
@@ -110,6 +125,31 @@ public class InfoBuilder {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public List<Information> transformInfoList(List<Information> infoList){
+		List<Information> infoResult = new ArrayList<Information>();
+		
+		for(int i = 0 ; i < infoList.size() ; i++){
+			Information info = infoList.get(i);
+			info = this.transformInfo(info);
+			infoList.set(i, info);
+		}
+		
+		return infoResult;
+	}
+	
+	public String getJSONInfoList(List<Information> infoList){
+		return JSON.encode(this.transformInfoList(infoList));
+	}
+	
+	private Information transformInfo(Information info){
+		String data = info.getRawContent();
+		String result = this.transformHTML(data);
+		
+		info.setRawContent(result);
+		return info;
+		
 	}
 
 	/**

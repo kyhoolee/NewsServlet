@@ -13,6 +13,7 @@ import javax.servlet.http.*;
 import com.minzbox.base.connector.DBConnector;
 import com.minzbox.base.entities.Information;
 import com.minzbox.base.retriever.InfoRetriever;
+import com.minzbox.base.transform.InfoBuilder;
 
 public class HelloWorld extends HttpServlet {
 
@@ -35,25 +36,24 @@ public class HelloWorld extends HttpServlet {
 		InfoRetriever infoRetriever = new InfoRetriever();
 		List<Information> infoList;
 		
-		out.println("<HTML>");
-		out.println("<HEAD></HEAD>");
-		
-		out.println("<BODY>");
+//		out.println("<HTML>");
+//		out.println("<HEAD></HEAD>");
+//		out.println("<BODY>");
 		
 		try {
 			infoList = infoRetriever.getInformationByPubDate(startDate, endDate);
-			for(int i = 0 ; i < infoList.size() ; i ++){
-				out.println("---------------------------------------------------");
-				out.println(infoList.get(i).getRawContent());
-				
-				
-			}
+			
+			InfoBuilder builder = new InfoBuilder();
+			String result = builder.getJSONInfoList(infoList);
+			
+			out.print(result);
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		out.println("</BODY></HTML>");
+		//out.println("</BODY></HTML>");
 		
 		
 //		out.println("<HTML>");
