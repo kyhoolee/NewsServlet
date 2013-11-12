@@ -35,6 +35,7 @@ public class HelloWorld extends HttpServlet {
 		
 		if(startDate == null || endDate == null){
 			out.print("[]");
+			return;
 		}
 		
 		InfoRetriever infoRetriever = new InfoRetriever();
