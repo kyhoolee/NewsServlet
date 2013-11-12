@@ -85,7 +85,7 @@ public class InfoBuilder {
 				System.out.println(alt);
 				System.out.println(src);
 				
-				Image img = new Image(src, alt);
+				Image img = new Image(alt, src);
 				imageList.add(img);
 			}
 
@@ -113,7 +113,7 @@ public class InfoBuilder {
 	}
 
 	public void runSample() {
-		String startDate = "2013-10-01";
+		String startDate = "2013-10-1";
 		String endDate = "2013-10-30";
 		try {
 			List<Information> infoList = new InfoRetriever()
@@ -130,15 +130,15 @@ public class InfoBuilder {
 		}
 	}
 	
-	public List<Information> transformInfoList(List<Information> infoList){
-		
+	public List<ReturnedNews> transformInfoList(List<Information> infoList){
+		List<ReturnedNews> result = new ArrayList<ReturnedNews>();
 		for(int i = 0 ; i < infoList.size() ; i++){
 			Information info = infoList.get(i);
-			info = this.transformInfo(info);
-			infoList.set(i, info);
+			ReturnedNews news = this.transformInfo(info);
+			result.add(news);
 		}
 		
-		return infoList;
+		return result;
 	}
 	
 	public String getJSONInfoList(List<Information> infoList){
@@ -146,12 +146,14 @@ public class InfoBuilder {
 		return result;
 	}
 	
-	private Information transformInfo(Information info){
-		String data = info.getRawContent();
-		String result = this.transformHTML(data);
+	private ReturnedNews transformInfo(Information info){
+		ReturnedNews result = new ReturnedNews(info);
 		
-		info.setRawContent(result);
-		return info;
+		String data = info.getRawContent();
+		List<Paragraph> paraList = this.transformObject(data);
+		
+		result.setNewsContent(paraList);
+		return result;
 		
 	}
 
