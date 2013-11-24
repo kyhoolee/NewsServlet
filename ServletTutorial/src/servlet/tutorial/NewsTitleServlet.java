@@ -38,33 +38,34 @@ public class NewsTitleServlet extends HttpServlet {
 		
 		PrintWriter out = response.getWriter();
 
-		String startDate = request.getParameter("startDate");
-		String endDate = request.getParameter("endDate");
+		String sourceId = request.getParameter("sourceId");
+		String start = request.getParameter("startIndex");
+		String stop = request.getParameter("stopIndex");
 		
-		if(startDate == null || endDate == null){
+		if(start == null || stop == null){
 			out.print("[]");
 			return;
 		}
 		
+		int startIndex = Integer.parseInt(start);
+		int stopIndex = Integer.parseInt(request.getParameter("stopIndex"));
+		
 		InfoRetriever infoRetriever = new InfoRetriever();
 		List<Information> infoList;
+
 		
-//		out.println("<HTML>");
-//		out.println("<HEAD></HEAD>");
-//		out.println("<BODY>");
-		
-		try {
-			infoList = infoRetriever.getInformationByPubDate(startDate, endDate);
-			
-			InfoBuilder builder = new InfoBuilder();
-			String result = builder.getJSONInfoList(infoList);
-			
-			out.print(result);
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			infoList = infoRetriever.getInformationByPubDate(startDate, endDate);
+//			
+//			InfoBuilder builder = new InfoBuilder();
+//			String result = builder.getJSONInfoList(infoList);
+//			
+//			out.print(result);
+//			
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 	/**
