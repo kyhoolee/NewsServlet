@@ -15,7 +15,7 @@ import com.minzbox.base.entities.Information;
 import com.minzbox.base.retriever.InfoRetriever;
 import com.minzbox.base.transform.InfoBuilder;
 
-public class HelloWorld extends HttpServlet {
+public class FullNewsServlet extends HttpServlet {
 
 	/**
 	 * 
@@ -25,9 +25,8 @@ public class HelloWorld extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 
-		res.setContentType("text/html");
-		res.setContentType("text/plain; charset=utf-8");
-		res.setCharacterEncoding("UTF-8");
+		res = ServletUtils.setEncode(res);
+		
 		PrintWriter out = res.getWriter();
 
 		String startDate = req.getParameter("startDate");
